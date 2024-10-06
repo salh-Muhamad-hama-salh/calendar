@@ -1,13 +1,8 @@
 import React from "react";
-import { auth } from "../lib/auth";
-import { redirect } from "next/navigation";
+import { requireUser } from "../lib/hooks";
 
 async function DashboardPage() {
-  const session = await auth();
-
-  if (!session?.user) {
-    return redirect("/");
-  }
+  const session = await requireUser();
   return <div>DashboardPage</div>;
 }
 
