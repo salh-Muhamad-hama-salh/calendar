@@ -9,6 +9,7 @@ import Image from "next/image";
 import React from "react";
 import Logo from "@/public/logo.png";
 import { signIn } from "../lib/auth";
+import GoogleAuthButton from "./SubmitButtons";
 
 function AuthModal() {
   return (
@@ -32,7 +33,7 @@ function AuthModal() {
             }}
           >
             {" "}
-            <Button className="w-full">Sign in with Google</Button>
+            <GoogleAuthButton />
           </form>
           <Button>Sign in with GitHub</Button>
         </div>
