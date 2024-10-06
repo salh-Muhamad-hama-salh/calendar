@@ -8,6 +8,7 @@ import {
 import Image from "next/image";
 import React from "react";
 import Logo from "@/public/logo.png";
+import { signIn } from "../lib/auth";
 
 function AuthModal() {
   return (
@@ -23,7 +24,16 @@ function AuthModal() {
           </h4>
         </DialogHeader>
         <div className="flex flex-col mt-5 gap-3">
-          <Button>Sign in with Google</Button>
+          <form
+            className="w-full"
+            action={async () => {
+              "use server";
+              await signIn("google");
+            }}
+          >
+            {" "}
+            <Button className="w-full">Sign in with Google</Button>
+          </form>
           <Button>Sign in with GitHub</Button>
         </div>
       </DialogContent>
