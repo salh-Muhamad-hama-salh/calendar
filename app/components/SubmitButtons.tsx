@@ -5,8 +5,9 @@ import { useFormStatus } from "react-dom";
 import Googlelogo from "@/public/google.svg";
 import Image from "next/image";
 import { Loader2 } from "lucide-react";
+import GitHublogo from "@/public/github.svg";
 
-function GoogleAuthButton() {
+export function GoogleAuthButton() {
   const { pending } = useFormStatus();
 
   return (
@@ -25,4 +26,21 @@ function GoogleAuthButton() {
   );
 }
 
-export default GoogleAuthButton;
+export function GitHubAuthButton() {
+  const { pending } = useFormStatus();
+
+  return (
+    <>
+      {pending ? (
+        <Button disabled variant="outline" className="w-full">
+          <Loader2 className="size-4 mr-2 animate-spin" /> Please wait...
+        </Button>
+      ) : (
+        <Button variant="outline" className="w-full">
+          <Image src={GitHublogo} alt="github" className="size-4 mr-2" />
+          Sign in with GitHub
+        </Button>
+      )}
+    </>
+  );
+}
