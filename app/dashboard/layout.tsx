@@ -3,21 +3,24 @@ import Link from "next/link";
 import * as React from "react";
 import Logo from "@/public/logo.png";
 import DashboardLinks from "../components/DashboardLinks";
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { Menu } from "lucide-react";
-export default function DashboardLayout({
+import { ThemeTogle } from "../components/ThemeTogle";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { auth } from "../lib/auth";
+
+export default async function DashboardLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const session = await auth();
   return (
     <>
       <div className="min-h-screen w-full grid md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
@@ -56,6 +59,30 @@ export default function DashboardLayout({
                 </nav>
               </SheetContent>
             </Sheet>
+            <div className="ml-auto flex items-center gap-x-4">
+              <ThemeTogle />
+
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    variant="secondary"
+                    size="icon"
+                    className="rounded-full"
+                  >
+                    <img
+                      src={session?.user?.image as string}
+                      alt="profile"
+                      width={20}
+                      height={20}
+                      className="rounded-full w-full h-full"
+                    />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
           </header>
         </div>
       </div>
