@@ -6,6 +6,44 @@ import Googlelogo from "@/public/google.svg";
 import Image from "next/image";
 import { Loader2 } from "lucide-react";
 import GitHublogo from "@/public/github.svg";
+import { cn } from "@/lib/utils";
+
+interface SubmitButtonProps {
+  text: string;
+  variant?:
+    | "link"
+    | "default"
+    | "destructive"
+    | "outline"
+    | "secondary"
+    | "ghost"
+    | null
+    | undefined;
+
+  className?: string;
+}
+
+export function SubmitButton({ text, variant, className }: SubmitButtonProps) {
+  const { pending } = useFormStatus();
+
+  return (
+    <>
+      {pending ? (
+        <Button disabled variant="outline" className={cn("w-fit", className)}>
+          <Loader2 className="size-4 mr-2 animate-spin" /> Please wait...
+        </Button>
+      ) : (
+        <Button
+          type="submit"
+          variant={variant}
+          className={cn("w-fit", className)}
+        >
+          {text}
+        </Button>
+      )}
+    </>
+  );
+}
 
 export function GoogleAuthButton() {
   const { pending } = useFormStatus();
