@@ -10,17 +10,20 @@ import { ThemeTogle } from "../components/ThemeTogle";
 import {
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuItem,
   DropdownMenuLabel,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { auth } from "../lib/auth";
+import { signOut } from "../lib/auth";
+import { requireUser } from "../lib/hooks";
 
 export default async function DashboardLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const session = await auth();
+  const session = await requireUser();
   return (
     <>
       <div className="min-h-screen w-full grid md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
@@ -80,10 +83,28 @@ export default async function DashboardLayout({
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
                   <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem asChild>
+                    <Link href="/dashboard/settings">Settings</Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <form
+                      action={async () => {
+                        "use server";
+                        await signOut();
+                      }}
+                      className="w-full"
+                    >
+                      <button className="w-full text-left">Log Out</button>
+                    </form>
+                  </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
             </div>
           </header>
+          <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
+            {children}
+          </main>
         </div>
       </div>
     </>
