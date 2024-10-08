@@ -1,13 +1,13 @@
 "use server";
 import prisma from "./lib/db";
 import { requireUser } from "./lib/hooks";
-import { parsWithZod } from "@conform-to/zod";
+import { parseWithZod } from "@conform-to/zod";
 import { onboardingSchema } from "./lib/zodSchemas";
 
 export async function OnboardingAction(prevSate: any, formData: FormData) {
   const session = await requireUser();
 
-  const submission = parsWithZod(formData, {
+  const submission = parseWithZod(formData, {
     schema: onboardingSchema,
   });
 
@@ -20,7 +20,7 @@ export async function OnboardingAction(prevSate: any, formData: FormData) {
       id: session.user?.id,
     },
     data: {
-      userName: submission.value.userName,
+      userName: submission.value.username,
       name: submission.value.fullName,
     },
   });
