@@ -76,3 +76,29 @@ html {
   -moz-user-drag: none; /* For Firefox */
   -o-user-drag: none; /* For Opera */
 }
+
+
+
+img:focus,
+img:active {
+  outline: none;
+  box-shadow: none;
+}
+
+/* Disable the selection overlay for images */
+img::selection {
+  background: none;
+}
+
+*,
+html {
+  scroll-behavior: smooth;
+  -webkit-user-drag: none; /* For Chrome and Safari */
+  -khtml-user-drag: none; /* For older Konqueror browsers */
+  -moz-user-drag: none; /* For Firefox */
+  -o-user-drag: none; /* For Opera */
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
+}
