@@ -33,12 +33,53 @@ export async function OnboardingAction(prevSate: any, formData: FormData) {
     data: {
       userName: submission.value.username,
       name: submission.value.fullName,
+      availability: {
+        createMany: {
+          data: [
+            {
+              day: "MONDAY",
+              fromTime: "08:00",
+              tillTime: "18:00",
+            },
+            {
+              day: "TUESDAY",
+              fromTime: "08:00",
+              tillTime: "18:00",
+            },
+            {
+              day: "WEDNESDAY",
+              fromTime: "08:00",
+              tillTime: "18:00",
+            },
+            {
+              day: "THURSDAY",
+              fromTime: "08:00",
+              tillTime: "18:00",
+            },
+            {
+              day: "FRIDAY",
+              fromTime: "08:00",
+              tillTime: "18:00",
+            },
+            {
+              day: "SATURDAY",
+              fromTime: "08:00",
+              tillTime: "18:00",
+            },
+            {
+              day: "SUNDAY",
+              fromTime: "08:00",
+              tillTime: "18:00",
+            },
+          ],
+        },
+      },
     },
   });
   return redirect("/onboarding/grant-id");
 }
 
-export async function SettingsAction(prevState: any ,formData: FormData) {
+export async function SettingsAction(prevState: any, formData: FormData) {
   const session = await requireUser();
   const submission = parseWithZod(formData, {
     schema: settingSchemas,
