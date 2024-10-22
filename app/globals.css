@@ -77,8 +77,6 @@ html {
   -o-user-drag: none; /* For Opera */
 }
 
-
-
 img:focus,
 img:active {
   outline: none;
